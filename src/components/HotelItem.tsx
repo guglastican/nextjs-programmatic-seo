@@ -64,6 +64,11 @@ export default function HotelItem({ hotel }: HotelItemProps) {
               </Badge>
             ))}
           </div>
+          <div className="mt-4">
+            <Button className="w-full" asChild>
+              <a href={hotel.link}>View Rooms</a>
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>

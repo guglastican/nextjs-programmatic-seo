@@ -29,7 +29,7 @@ const hotels: Hotel[] = [
     reviews: 321,
     tags: ["Pool", "Hot Tub", "Luxury"],
     amenities: ["Pool", "Hot tub", "Spa", "Restaurant"],
-    link: "/hotel/1/rooms"
+    link: "/hotels/1"
   },
   {
     id: 2,
@@ -44,7 +44,7 @@ const hotels: Hotel[] = [
     amenities: ["Kids Zone", "Thrill Slides", "Pool"],
     reviews: 445,
     tags: ["Thrill Rides", "Kids Area", "Food Court"],
-    link: "/waterpark/2/rooms"
+    link: "/hotels/2"
   },
   {
     id: 3,
@@ -59,7 +59,7 @@ const hotels: Hotel[] = [
     reviews: 567,
     tags: ["Surf Pool", "Beach Entry", "Cabanas"],
     amenities: ["Surf Pool", "Private Cabanas", "Restaurant"],
-    link: "/waterpark/3/rooms"
+    link: "/hotels/3"
   }
 ];
 
