@@ -21,9 +21,9 @@ export default function HotelItem({ hotel }: HotelItemProps) {
       <Image
         src={hotel.image}
         alt={hotel.name}
-        width={800}
-        height={500}
-        className="h-48 w-full object-cover"
+        width={1200}
+        height={600}
+        className="h-64 w-full object-cover"
       />
       <CardHeader>
         <div className="flex items-start justify-between">

@@ -19,7 +19,7 @@ const hotels: Hotel[] = [
 {
     id: 1,
     name: "Splash Paradise",
-    image: "https://images.trvl-media.com/lodging/107000000/106250000/106242900/106242852/634da6e2.jpg",
+    image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=800&auto=format&fit=crop&q=60",
     rating: 4.7,
     price: "500$",
     address: "768 Splash Ave, San Francisco, CA",
