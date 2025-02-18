@@ -32,7 +32,7 @@ export default function Header({ q, location }: HeaderProps) {
         <div className="flex flex-col items-center gap-4">
           <Link href="/">
             <span className="text-3xl font-bold text-primary-foreground">
-              Restaurant Finder
+              Romantic Hotel Finder
             </span>
           </Link>
           <form
@@ -43,7 +43,7 @@ export default function Header({ q, location }: HeaderProps) {
           >
             <Input
               name="q"
-              placeholder="Search restaurants..."
+              placeholder="Search hotels..."
               defaultValue={q}
               type="search"
               required
