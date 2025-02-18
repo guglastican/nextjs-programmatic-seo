@@ -1,4 +1,4 @@
-import banner from "@/assets/hotel-banner.jpg";
+import banner from "@/assets/restaurant-banner.jpg";
 import Header from "@/components/Header";
 import Image from "next/image";
 
@@ -11,8 +11,10 @@ export default async function Home() {
           <Image
             src={banner}
             alt="Hotel Finder"
-            layout="fill"
-            objectFit="cover"
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: 'cover' }}
             className="rounded-lg"
           />
           <div className="absolute inset-0 flex flex-col items-center justify-end space-y-2 rounded-lg bg-gradient-to-t from-black via-transparent to-transparent p-4 text-white">
