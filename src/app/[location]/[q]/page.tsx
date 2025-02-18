@@ -1,6 +1,7 @@
+
 import Header from "@/components/Header";
-import RestaurantItem from "@/components/RestaurantItem";
-import { getAllTags, locations, searchRestaurants } from "@/data/restaurants";
+import HotelItem from "@/components/HotelItem";
+import { getAllTags, locations, searchHotels } from "@/data/hotels";
 import { Metadata } from "next";
 import { cache } from "react";
 
@@ -8,13 +9,10 @@ interface PageProps {
   params: { location: string; q: string };
 }
 
-export const revalidate = 86400; // Refresh cached pages once every 24 hours
+export const revalidate = 86400;
 
 export async function generateStaticParams() {
-  const allTags = await getAllTags({
-    // If you have very many pages, you can only render a subset at compile-time. The rest will be rendered & cached at first access.
-    // limit: 10
-  });
+  const allTags = await getAllTags();
 
   return allTags
     .map((tag) =>
@@ -26,7 +24,7 @@ export async function generateStaticParams() {
     .flat();
 }
 
-const getRestaurants = cache(searchRestaurants);
+const getHotels = cache(searchHotels);
 
 export async function generateMetadata({
   params,
@@ -36,7 +34,7 @@ export async function generateMetadata({
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
 
-  const results = await getRestaurants(qDecoded, locationDecoded);
+  const results = await getHotels(qDecoded, locationDecoded);
 
   return {
     title: `Top ${results.length} ${qDecoded} near ${locationDecoded} - Updated ${new Date().getFullYear()}`,
@@ -50,7 +48,7 @@ export default async function Page({ params }: PageProps) {
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
 
-  const results = await getRestaurants(qDecoded, locationDecoded);
+  const results = await getHotels(qDecoded, locationDecoded);
 
   return (
     <div>
@@ -60,8 +58,8 @@ export default async function Page({ params }: PageProps) {
           Top {results.length} {qDecoded} near {locationDecoded}
         </h1>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {results.map((restaurant) => (
-            <RestaurantItem key={restaurant.id} restaurant={restaurant} />
+          {results.map((hotel) => (
+            <HotelItem key={hotel.id} hotel={hotel} />
           ))}
         </div>
       </main>
