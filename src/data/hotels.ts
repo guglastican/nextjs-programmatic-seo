@@ -5,12 +5,14 @@ export interface Hotel {
   image: string;
   rating: number;
   price: string;
-  cuisine: string;
+  description: string;
   address: string;
   phone: string;
   hours: string;
   reviews: number;
   tags: string[];
+  amenities: string[];
+  link: string;
 }
 
 const hotels: Hotel[] = [
@@ -68,7 +70,7 @@ export async function searchHotels(q: string, location: string) {
       searchWords.every(
         (word) =>
           hotel.name.toLowerCase().includes(word.toLowerCase()) ||
-          hotel.cuisine.toLowerCase().includes(word.toLowerCase()) ||
+          hotel.description.toLowerCase().includes(word.toLowerCase()) ||
           hotel.tags.some((tag) =>
             tag.toLowerCase().includes(word.toLowerCase())
           )
