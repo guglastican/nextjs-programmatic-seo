@@ -20,15 +20,16 @@ const hotels: Hotel[] = [
     id: 1,
     name: "Splash Paradise",
     image: "https://images.trvl-media.com/lodging/107000000/106250000/106242900/106242852/634da6e2.jpg",
-    image: "https://images.trvl-media.com/lodging/107000000/106250000/106242900/106242852/w1080h718x0y0-15862de8.jpg",
     rating: 4.7,
     price: "500$",
     address: "768 Splash Ave, San Francisco, CA",
-    description: " Discover the beauty of Dallas from this 2-bedroom apartment. Step into this awesome property and feel right at home. With its nice and welcoming ambiance, guests will instantly feel relaxed and comfortable.",
-    amenities: ["Pool", "Hot tub"],
+    description: "Discover the beauty of Dallas from this 2-bedroom apartment. Step into this awesome property and feel right at home. With its nice and welcoming ambiance, guests will instantly feel relaxed and comfortable.",
+    phone: "(415) 555-0123",
+    hours: "24/7",
     reviews: 321,
-    tags: ["Pool", "Hot Tub"],
-    link: "https://images.trvl-media.com/lodging/107000000/106250000/106242900/106242852/634da6e2.jpg"
+    tags: ["Pool", "Hot Tub", "Luxury"],
+    amenities: ["Pool", "Hot tub", "Spa", "Restaurant"],
+    link: "/hotel/1/rooms"
   },
   {
     id: 2,
