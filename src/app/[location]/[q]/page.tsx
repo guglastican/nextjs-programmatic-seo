@@ -5,9 +5,8 @@ import { Metadata } from "next";
 import { cache } from "react";
 
 interface PageProps {
-  searchParams: { [key: string]: string | string[] | undefined; };
+  params: Promise<{ location: string; q: string }>;
 }
-
 
 export const revalidate = 86400; // Refresh cached pages once every 24 hours
 
