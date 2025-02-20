@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { cache } from "react";
 
 interface PageProps {
-  params: Promise<{ location: string; q: string }>;
+  params: { location: string; q: string };
 }
 
 export const revalidate = 86400;
