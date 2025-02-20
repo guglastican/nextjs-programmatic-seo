@@ -1,4 +1,3 @@
-
 import Header from "@/components/Header";
 import HotelItem from "@/components/HotelItem";
 import { getAllTags, locations, searchHotels } from "@/data/hotels";
@@ -29,7 +28,7 @@ const getHotels = cache(searchHotels);
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { q, location } = await params; // Await the params Promise
+  const { q, location } = params;
 
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
@@ -43,7 +42,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: PageProps) {
-  const { q, location } = await params; // Await the params Promise
+  const { q, location } = params;
 
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
