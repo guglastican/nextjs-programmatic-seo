@@ -4,9 +4,9 @@ import { getAllTags, locations, searchHotels } from "@/data/hotels";
 import { Metadata } from "next";
 import { cache } from "react";
 
-// Adjusted to expect Promise for searchParams correctly in Next.js 15+
+// Adjusted type definition for PageProps
 interface PageProps {
-  searchParams: Promise<{ location: string; q: string }>; // Ensure it's a Promise
+  searchParams: { [key: string]: string | string[] | undefined }; // No Promise here
 }
 
 export const revalidate = 86400; // Refresh cached pages once every 24 hours
@@ -32,11 +32,10 @@ const getHotels = cache(searchHotels);
 export async function generateMetadata({
   searchParams,
 }: PageProps): Promise<Metadata> {
-  // Awaiting the Promise here
-  const { q, location } = await searchParams; 
+  const { q, location } = searchParams; // Directly access the searchParams object
 
-  const qDecoded = decodeURIComponent(q);
-  const locationDecoded = decodeURIComponent(location);
+  const qDecoded = decodeURIComponent(q as string);
+  const locationDecoded = decodeURIComponent(location as string);
 
   const results = await getHotels(qDecoded, locationDecoded);
 
@@ -47,11 +46,10 @@ export async function generateMetadata({
 }
 
 export default async function Page({ searchParams }: PageProps) {
-  // Await the Promise here as well
-  const { q, location } = await searchParams; 
+  const { q, location } = searchParams; // Directly access the searchParams object
 
-  const qDecoded = decodeURIComponent(q);
-  const locationDecoded = decodeURIComponent(location);
+  const qDecoded = decodeURIComponent(q as string);
+  const locationDecoded = decodeURIComponent(location as string);
 
   const results = await getHotels(qDecoded, locationDecoded);
 
