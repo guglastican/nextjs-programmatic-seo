@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -39,40 +40,41 @@ export default function LocationInput({
           className="w-[180px] flex-none justify-between"
         >
           {input
-            ? // In a real app, search would call an API
-              locations.find((location) => location === input)
+            ? locations.find((location) => location === input)
             : "Filter location..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <input type="hidden" name={name} value={input} />
       <PopoverContent className="w-[180px] p-0">
-        <Command>
-          <CommandInput placeholder="Search location..." />
-          <CommandList>
-            <CommandEmpty>No location found.</CommandEmpty>
-            <CommandGroup>
-              {locations.map((location) => (
-                <CommandItem
-                  key={location}
-                  value={location}
-                  onSelect={(currentValue) => {
-                    setInput(currentValue === input ? "" : currentValue);
-                    setOpen(false);
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      input === location ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                  {location}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
+        <div className="command-wrapper">
+          <Command>
+            <CommandInput placeholder="Search location..." />
+            <CommandList>
+              <CommandEmpty>No location found.</CommandEmpty>
+              <CommandGroup>
+                {locations.map((location) => (
+                  <CommandItem
+                    key={location}
+                    value={location}
+                    onSelect={(currentValue) => {
+                      setInput(currentValue === input ? "" : currentValue);
+                      setOpen(false);
+                    }}
+                  >
+                    <Check
+                      className={cn(
+                        "mr-2 h-4 w-4",
+                        input === location ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                    {location}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </div>
       </PopoverContent>
     </Popover>
   );
