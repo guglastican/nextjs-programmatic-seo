@@ -6,11 +6,7 @@ import { Metadata } from "next";
 import { cache } from "react";
 
 interface PageProps {
-  params: {
-    location: string;
-    q: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ location: string; q: string }>;
 }
 
 export const revalidate = 86400;
