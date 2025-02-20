@@ -26,7 +26,7 @@ export async function generateStaticParams() {
     .flat();
 }
 
-const getRestaurants = cache(searchHotels);
+const getHotels = cache(searchHotels);
 
 export async function generateMetadata({
   params,
