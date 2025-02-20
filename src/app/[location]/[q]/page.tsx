@@ -36,7 +36,7 @@ export async function generateMetadata({
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
 
-  const results = await gethotels(qDecoded, locationDecoded);
+  const results = await getHotels(qDecoded, locationDecoded);
 
   return {
     title: `Top ${results.length} ${qDecoded} near ${locationDecoded} - Updated ${new Date().getFullYear()}`,
