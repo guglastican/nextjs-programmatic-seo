@@ -4,9 +4,9 @@ import { getAllTags, locations, searchHotels } from "@/data/hotels";
 import { Metadata } from "next";
 import { cache } from "react";
 
-// Remove the Promise wrapper here
+// Keep `params` as a Promise type, and await it inside async functions
 interface PageProps {
-  params: { location: string; q: string };
+  params: Promise<{ location: string; q: string }>;
 }
 
 export const revalidate = 86400; // Refresh cached pages once every 24 hours
@@ -32,7 +32,7 @@ const getHotels = cache(searchHotels);
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { q, location } = params; // No need for `await` since `params` is not a Promise
+  const { q, location } = await params; // Await `params` since it's a Promise
 
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
@@ -46,7 +46,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: PageProps) {
-  const { q, location } = params; // No need for `await` since `params` is not a Promise
+  const { q, location } = await params; // Await `params` since it's a Promise
 
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
