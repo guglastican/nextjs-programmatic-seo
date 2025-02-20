@@ -50,7 +50,7 @@ export default async function Page({ params }: PageProps) {
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
 
-  const results = await getRestaurants(qDecoded, locationDecoded);
+  const results = await getHotels(qDecoded, locationDecoded);
 
   return (
     <div>
