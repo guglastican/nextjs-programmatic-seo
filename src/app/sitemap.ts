@@ -1,3 +1,4 @@
+
 import { getAllTags, locations } from "@/data/hotels";
 import { MetadataRoute } from "next";
 
@@ -6,26 +7,20 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const allTags = await getAllTags();
 
-  const searchLandingPages = allTags
+  const dynamicRoutes = allTags
     .map((tag) =>
       locations.map((location) => ({
-        url: `${baseUrl}/${location}/${tag}`,
-        lastModified: new Date(),
-        changeFrequency: "weekly",
-        priority: 1,
+        url: `${baseUrl}/${location}/${encodeURIComponent(tag)}`,
+        lastModified: new Date().toISOString(),
       })),
     )
-    .flat() as MetadataRoute.Sitemap;
+    .flat();
 
   return [
-    // Insert your other pages:
     {
-      url: `${baseUrl}/about`,
-      lastModified: "2024-12-31",
-      changeFrequency: "yearly",
-      priority: 0.8,
+      url: baseUrl || "",
+      lastModified: new Date().toISOString(),
     },
-    // Our pSEO pages:
-    ...searchLandingPages,
+    ...dynamicRoutes,
   ];
 }
