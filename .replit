@@ -8,6 +8,7 @@ channel = "stable-24_05"
 build = ["sh", "-c", "npm run build"]
 deploymentTarget = "static"
 publicDir = "nextjs-programmatic-seo"
+run = ["sh", "-c", "npx serve out"]
 
 [[ports]]
 localPort = 3000
