@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 interface PageProps {
-  searchParams: { q?: string; location?: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 export default async function Page({ searchParams }: PageProps) {
