@@ -31,7 +31,7 @@ export default function HotelItem({ hotel }: HotelItemProps) {
           <div>
             <CardTitle className="text-xl">{hotel.name}</CardTitle>
             <CardDescription>
-              {hotel.cuisine} • {hotel.price}
+              Price: • {hotel.price}
             </CardDescription>
           </div>
           <div className="flex items-center">
@@ -51,14 +51,14 @@ export default function HotelItem({ hotel }: HotelItemProps) {
             <span className="text-sm">{hotel.address}</span>
           </div>
           <div className="flex items-center text-muted-foreground">
-            <Phone className="mr-2 h-4 w-4" />
-            <span className="text-sm">{hotel.phone}</span>
-          </div>
-          <div className="flex items-center text-muted-foreground">
             <Clock className="mr-2 h-4 w-4" />
             <span className="text-sm">{hotel.hours}</span>
           </div>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="flex items-center text-muted-foreground">
+            <Phone className="mr-2 h-4 w-4" />
+            <span className="text-sm">{hotel.description}</span>
+          </div>
+           <div className="mt-3 flex flex-wrap gap-2">
             {hotel.tags.map((tag) => (
               <Badge key={tag} variant="secondary">
                 {tag}
