@@ -13,6 +13,15 @@ const nextConfig: NextConfig = {
     ],
   },
   trailingSlash: true,
+  async redirects() {
+    return [
+      {
+        source: '/:location/:q',
+        destination: '/:location/:q/',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
