@@ -4,37 +4,39 @@ import { getAllTags, locations, searchHotels } from "@/data/hotels";
 import { Metadata } from "next";
 import { cache } from "react";
 
-type PageProps = {
-  params: { location: string; q: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+interface PageProps {
+  params: Promise<{ location: string; q: string }>;
 }
 
-export const revalidate = 86400;
+export const revalidate = 86400; // Refresh cached pages once every 24 hours
 
 export async function generateStaticParams() {
-  const allTags = await getAllTags();
+  const allTags = await getAllTags({
+    // If you have very many pages, you can only render a subset at compile-time. The rest will be rendered & cached at first access.
+    // limit: 10
+  });
 
   return allTags
     .map((tag) =>
       locations.map((location) => ({
         location,
         q: tag,
-      }))
+      })),
     )
     .flat();
 }
 
-const getHotels = cache(searchHotels);
+const getRestaurants = cache(searchHotels);
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { q, location } = params;
+  const { q, location } = await params;
 
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
 
-  const results = await getHotels(qDecoded, locationDecoded);
+  const results = await gethotels(qDecoded, locationDecoded);
 
   return {
     title: `Top ${results.length} ${qDecoded} near ${locationDecoded} - Updated ${new Date().getFullYear()}`,
@@ -43,12 +45,12 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: PageProps) {
-  const { q, location } = params;
+  const { q, location } = await params;
 
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
 
-  const results = await getHotels(qDecoded, locationDecoded);
+  const results = await getRestaurants(qDecoded, locationDecoded);
 
   return (
     <div>
