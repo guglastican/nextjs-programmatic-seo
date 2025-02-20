@@ -1,18 +1,17 @@
+
 import Header from "@/components/Header";
 import HotelItem from "@/components/HotelItem";
 import { getAllTags, locations, searchHotels } from "@/data/hotels";
 import { Metadata } from "next";
 import { cache } from "react";
 
-interface PageProps {
+type PageProps = {
   params: {
     location: string;
     q: string;
   };
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-}
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
 export const revalidate = 86400;
 
@@ -24,7 +23,7 @@ export async function generateStaticParams() {
       locations.map((location) => ({
         location,
         q: tag,
-      })),
+      }))
     )
     .flat();
 }
