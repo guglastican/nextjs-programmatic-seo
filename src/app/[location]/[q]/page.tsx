@@ -4,7 +4,7 @@ import { getAllTags, locations, searchHotels } from "@/data/hotels";
 import { Metadata } from "next";
 import { cache } from "react";
 
-interface PageProps {
+type PageProps = {
   params: { location: string; q: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }
