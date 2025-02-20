@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { cache } from "react";
 
 interface PageProps {
-  params: { location: string; q: string };
+  params: Promise<{ location: string; q: string }>;
 }
 
 export const revalidate = 86400;
@@ -29,7 +29,7 @@ const getHotels = cache(searchHotels);
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { q, location } = params;
+  const { q, location } = await params; // Await the params Promise
 
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
@@ -43,7 +43,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: PageProps) {
-  const { q, location } = params;
+  const { q, location } = await params; // Await the params Promise
 
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
