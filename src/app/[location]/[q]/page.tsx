@@ -4,9 +4,9 @@ import { getAllTags, locations, searchHotels } from "@/data/hotels";
 import { Metadata } from "next";
 import { cache } from "react";
 
-// Adjusted type definition for PageProps
+// Adjusted type definition for PageProps (removed Promise)
 interface PageProps {
-  searchParams: { [key: string]: string | string[] | undefined }; // No Promise here
+  params: { location: string; q: string };
 }
 
 export const revalidate = 86400; // Refresh cached pages once every 24 hours
@@ -30,12 +30,12 @@ export async function generateStaticParams() {
 const getHotels = cache(searchHotels);
 
 export async function generateMetadata({
-  searchParams,
+  params,
 }: PageProps): Promise<Metadata> {
-  const { q, location } = searchParams; // Directly access the searchParams object
+  const { q, location } = params;
 
-  const qDecoded = decodeURIComponent(q as string);
-  const locationDecoded = decodeURIComponent(location as string);
+  const qDecoded = decodeURIComponent(q);
+  const locationDecoded = decodeURIComponent(location);
 
   const results = await getHotels(qDecoded, locationDecoded);
 
@@ -45,11 +45,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ searchParams }: PageProps) {
-  const { q, location } = searchParams; // Directly access the searchParams object
+export default async function Page({ params }: PageProps) {
+  const { q, location } = params;
 
-  const qDecoded = decodeURIComponent(q as string);
-  const locationDecoded = decodeURIComponent(location as string);
+  const qDecoded = decodeURIComponent(q);
+  const locationDecoded = decodeURIComponent(location);
 
   const results = await getHotels(qDecoded, locationDecoded);
 
