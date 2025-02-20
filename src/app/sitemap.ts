@@ -1,4 +1,3 @@
-
 import { getAllTags, locations } from "@/data/hotels";
 import { MetadataRoute } from "next";
 
