@@ -2,6 +2,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'export',
   images: {
     remotePatterns: [
       {
@@ -9,6 +10,7 @@ const nextConfig: NextConfig = {
         hostname: "images.trvl-media.com",
       },
     ],
+    unoptimized: true,
   },
 };
 
