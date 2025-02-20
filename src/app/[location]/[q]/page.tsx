@@ -5,13 +5,13 @@ import { getAllTags, locations, searchHotels } from "@/data/hotels";
 import { Metadata } from "next";
 import { cache } from "react";
 
-type PageProps = {
+interface PageProps {
   params: {
     location: string;
     q: string;
   };
   searchParams: { [key: string]: string | string[] | undefined };
-};
+}
 
 export const revalidate = 86400;
 
