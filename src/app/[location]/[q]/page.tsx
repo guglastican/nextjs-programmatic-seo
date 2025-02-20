@@ -4,9 +4,9 @@ import { getAllTags, locations, searchHotels } from "@/data/hotels";
 import { Metadata } from "next";
 import { cache } from "react";
 
-// Adjusted to expect Promise for params correctly in Next.js 15+
+// Adjusted to expect Promise for searchParams correctly in Next.js 15+
 interface PageProps {
-  searchParams: Promise<{ location: string; q: string }>;
+  searchParams: Promise<{ location: string; q: string }>; // Ensure it's a Promise
 }
 
 export const revalidate = 86400; // Refresh cached pages once every 24 hours
@@ -32,7 +32,8 @@ const getHotels = cache(searchHotels);
 export async function generateMetadata({
   searchParams,
 }: PageProps): Promise<Metadata> {
-  const { q, location } = await searchParams; // Await to resolve Promise
+  // Awaiting the Promise here
+  const { q, location } = await searchParams; 
 
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
@@ -46,7 +47,8 @@ export async function generateMetadata({
 }
 
 export default async function Page({ searchParams }: PageProps) {
-  const { q, location } = await searchParams; // Await to resolve Promise
+  // Await the Promise here as well
+  const { q, location } = await searchParams; 
 
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
