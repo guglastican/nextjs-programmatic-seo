@@ -5,9 +5,12 @@ import { Metadata } from "next";
 import { cache } from "react";
 
 // Adjusted type definition for PageProps (removed Promise)
-interface PageProps {
-  params: { location: string; q: string };
-}
+type PageProps = {
+  params: {
+    location: string;
+    q: string;
+  };
+};
 
 export const revalidate = 86400; // Refresh cached pages once every 24 hours
 
@@ -45,8 +48,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: PageProps) {
-  const { q, location } = params;
+export default function Page({ params }: PageProps) {
+  const { location, q } = params;
+  return <div>{location} - {q}</div>;
+}
 
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
