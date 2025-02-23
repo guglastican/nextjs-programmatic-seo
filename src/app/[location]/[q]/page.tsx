@@ -1,58 +1,17 @@
-import Header from "@/components/Header";
-import HotelItem from "@/components/HotelItem";
-import { getAllTags, locations, searchHotels } from "@/data/hotels";
-import { Metadata } from "next";
-import { cache } from "react";
+import { Header } from "@/components/Header"; // Adjust import as needed
+import { HotelItem } from "@/components/HotelItem"; // Adjust import as needed
 
-// Adjusted type definition for PageProps (removed Promise)
-type PageProps = {
-  params: {
-    location: string;
-    q: string;
-  };
-};
-
-export const revalidate = 86400; // Refresh cached pages once every 24 hours
-
-export async function generateStaticParams() {
-  const allTags = await getAllTags({
-    // If you have very many pages, you can only render a subset at compile-time. The rest will be rendered & cached at first access.
-    // limit: 10
-  });
-
-  return allTags
-    .map((tag) =>
-      locations.map((location) => ({
-        location,
-        q: tag,
-      }))
-    )
-    .flat();
+async function getHotels(query: string, location: string) {
+  // Your implementation here
+  return []; // Replace with actual logic
 }
 
-const getHotels = cache(searchHotels);
-
-export async function generateMetadata({
+export default async function Page({
   params,
-}: PageProps): Promise<Metadata> {
-  const { q, location } = params;
-
-  const qDecoded = decodeURIComponent(q);
-  const locationDecoded = decodeURIComponent(location);
-
-  const results = await getHotels(qDecoded, locationDecoded);
-
-  return {
-    title: `Top ${results.length} ${qDecoded} near ${locationDecoded} - Updated ${new Date().getFullYear()}`,
-    description: `Find the best ${qDecoded} near ${locationDecoded}`,
-  };
-}
-
-export default function Page({ params }: PageProps) {
-  const { location, q } = params;
-  return <div>{location} - {q}</div>;
-}
-
+}: {
+  params: Promise<{ location: string; q: string }>;
+}) {
+  const { location, q } = await params; // Await the dynamic params
   const qDecoded = decodeURIComponent(q);
   const locationDecoded = decodeURIComponent(location);
 
